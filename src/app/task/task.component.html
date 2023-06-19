@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="card mt-3">
+        <div class="card-header fw-bolder">Görev Listesi</div>
+        <div class="card-body">
+            <label for="task" class="form-label">Görev giriniz: </label>
+            <div class="input-group">
+                <input name="task" type="text" class="form-control col-6" [(ngModel)]="newTask">
+                <button class=" btn btn-success col-4" (click)="saveTask()">Ekle</button>
+            </div>
+            <table class="table table-striped mt-2">
+                        <th class="col-4 bg-dark-subtle p-2">Sıra</th>
+                        <td class="col-4 bg-dark-subtle p-2">Görev</td>
+                        <button class="btn btn-danger fw-bolder col-12" disabled>Sil</button>
+                <tbody class="my-2">
+                    <tr *ngFor="let task of tasks;let i = index" class="mt-2" (click)="doneTask(i)"> 
+                        <th class="{{(task.isCompleted)?'done':''}}" scope="row">{{i+1}}</th>
+                        <td class="{{(task.isCompleted)?'done':''}}" >{{task.name}} <p class="d-inline fw-bolder" *ngIf="task.isCompleted">&#x2714;</p></td>
+                        <button class="btn btn-danger fw-bolder col-12" (click)="deleteTask(i)">X</button>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="container alert alert-danger" *ngIf="error">
+    {{error}}
+</div>
